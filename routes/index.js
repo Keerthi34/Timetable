@@ -37,6 +37,31 @@ router.get('/fetch', function(req, res, next) {
   })
 });
 
+/*Get particular teacher schedule*/
+router.get('/teacherschedule/:School_Id/:Teacher_Id',function(req,res,next){
+  winston.log('info',"Info: Get class details")
+  Timetable.find({School_Id:req.params.School_Id,Teacher_Id: req.params.Teacher_Id},function(err,data){
+    if(err)
+    res.status(500).send(err);
+    else {
+      res.status(200).json(data);
+    }
+  })
+})
+
+/*Get particular class timetable*/
+router.get('/timetable/:School_Id/:Class_Id',function(req,res,next){
+  winston.log('info',"Info: Get class details")
+  Timetable.find({School_Id:req.params.School_Id,Class_Id: req.params.Class_Id},function(err,data){
+    if(err)
+    res.status(500).send(err);
+    else {
+      res.status(200).json(data);
+    }
+  })
+})
+
+
 /*Add Timetable*/
 router.post('/add', function(req,res,next){
   var t= new Timetable({
