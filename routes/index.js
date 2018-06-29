@@ -98,7 +98,7 @@ router.get('/delete/:_id',function(req,res,next){
 })
 
 /*Update Records*/
-router.put('/update/:_id', function(req,res,next){
+router.put('/update2/:_id', function(req,res,next){
   winston.log('info',"Info level")
 var query={_id: req.params._id};
       Timetable.update(query, req.body, function(err,data){
@@ -110,6 +110,17 @@ var query={_id: req.params._id};
   })
 })
 
+router.put('/update/:_id', function(req,res,next){
+  winston.log('info',"Info level")
+var query={_id: req.params._id};
+      Timetable.findByIdAndUpdate(query, req.body, function(err,data){
+                   if(err) res.status(404).json(err);
+                   else {
+                     res.status(202).json(data)
+                   }
+
+  })
+})
 
 
 module.exports = router;
